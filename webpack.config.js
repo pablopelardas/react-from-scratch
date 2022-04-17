@@ -3,6 +3,7 @@
 //npm install webpack webpack-cli webpack-dev-server --save-dev
 //npm install html-webpack-plugin html-loader --save-dev
 //npm install babel-loader @babel/preset-env @babel/preset-react @babel/core @babel/plugin-transform-runtime babel-eslint @babel/runtime --save-dev
+//npm install css-loader mini-css-extract-plugin --save-dev
 //En el .babelrc debemos poner el siguiente codigo:
 // {
 //   "presets": ["@babel/preset-env", "@babel/preset-react"],
@@ -10,6 +11,7 @@
 // }
 const path = require('path'); // Es de Node y nos va a traer el path de nuestra carpeta
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
 	//Cual es el archivo principal y donde se encuentra, es el punto de entrada que va a leer webpack
@@ -45,6 +47,15 @@ module.exports = {
 					},
 				],
 			},
+			{
+				test: /\.css$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+					},
+					'css-loader',
+				],
+			},
 		],
 	},
 	//Aqui vamos a definir que plugins vamos a utilizar, debemos pasarlo por medio de un arreglo e instanciarlos con un new (por eso debemos hacer el require del inicio.
@@ -53,6 +64,9 @@ module.exports = {
 			//Nuestro template es el punto de entrada que va a tomar este recurso, y el filename es el archivo que va a enviar en nuestra carpeta de dist.
 			template: './public/index.html',
 			filename: './index.html',
+		}),
+		new MiniCssExtractPlugin({
+			filename: 'assets/[name].css',
 		}),
 	],
 	//Por ultimo debemos configurar devserver, lo que nos va a permitir usar un servidor de desarrollo local donde vamos a poder ver los cambios de nuestra aplicacion "en vivo"
