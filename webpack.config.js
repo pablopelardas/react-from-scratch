@@ -4,6 +4,7 @@
 //npm install html-webpack-plugin html-loader --save-dev
 //npm install babel-loader @babel/preset-env @babel/preset-react @babel/core @babel/plugin-transform-runtime babel-eslint @babel/runtime --save-dev
 //npm install css-loader mini-css-extract-plugin --save-dev
+//npm install sass-loader node-sass --save-dev
 //En el .babelrc debemos poner el siguiente codigo:
 // {
 //   "presets": ["@babel/preset-env", "@babel/preset-react"],
@@ -48,13 +49,8 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.css$/,
-				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-					},
-					'css-loader',
-				],
+				test: /\.(scss|css)$/,
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 			},
 		],
 	},
