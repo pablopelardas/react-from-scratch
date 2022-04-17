@@ -10,6 +10,12 @@
     "format": "prettier --write {*.js,src/**/*.{js,jsx}}",
     "lint": "eslint src/ --fix"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test && npm run format && npm run lint", 
+      "pre-push": "npm test"
+    }
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",
