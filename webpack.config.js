@@ -1,13 +1,6 @@
-//Para utilizar esta configuración base de webpack primero debemos tener instalados las siguientes libreriías/loaders/plugins:
-//npm install react react-dom
-//npm install webpack webpack-cli webpack-dev-server --save-dev
-//npm install html-webpack-plugin html-loader --save-dev
-//npm install babel-loader @babel/preset-env @babel/preset-react @babel/core @babel/plugin-transform-runtime babel-eslint @babel/runtime --save-dev
-//npm install css-loader mini-css-extract-plugin --save-dev
-//npm install sass-loader node-sass --save-dev
 const path = require('path'); // Es de Node y nos va a traer el path de nuestra carpeta
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // Nos va a insertar el bundle en nuestro html
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //Loader y minificador para CSS y SCSS
 
 module.exports = {
   //Cual es el archivo principal y donde se encuentra, es el punto de entrada que va a leer webpack
@@ -18,6 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     //bundle.js va a ser el archivo que vamos a tener que agregar al proyecto, HtmlWebpackPlugin va a agregarlo a nuestro html por nosotros
     filename: 'bundle.js',
+    publicPath: '/',
   },
   //resolve va a indicar que extensiones va a estar escuchando nuestra configuracion, sobre las que va a trabajar. Particularmente solo vamos a usar .js y .jsx para react.
   resolve: {
@@ -66,6 +60,7 @@ module.exports = {
     open: true,
     hot: true,
     liveReload: true,
+    historyApiFallback: true,
     compress: true,
     port: 3000,
   },
